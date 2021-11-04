@@ -1,3 +1,5 @@
+import Navbar from './Navbar'
+
 const Debits = (props) => {
     let debitsView = () => {
         const { debits } = props;
@@ -7,10 +9,6 @@ const Debits = (props) => {
         })
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault();//prevents the page from refreshing
-        props.addDebit(e,{amount:props.debitAmount, description:props.debitDescription})
-    }
 
     return (
         <div>
@@ -20,8 +18,8 @@ const Debits = (props) => {
             </ul>
 
             <form>
-                <input type="text" value={props.debitDescription} />
-                <input type="text" value={props.debitAmount} />
+                <input type="text" value={props.debitDescription} onChange={props.handleDescriptionChange} />
+                <input type="text" value={props.debitAmount} onChange={props.handleAmountChange} />
                 <input type="submit" value="Add Debit" />
             </form>
 

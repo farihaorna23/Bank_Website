@@ -57,7 +57,7 @@ class App extends Component {
             {
                 amount: this.state.debitAmount,//setting whatever amount the user typed in the text field
                 description: this.state.debitDescription, //setting whatever amount the user typed in the text field
-                id:uuid(), //generates a new id
+                id: uuid(), //generates a new id
                 date: new Date(),//generates the current date
             }]
         }) //keeps the old information but also add new information 
@@ -67,6 +67,18 @@ class App extends Component {
         const newUser = { ...this.state.currentUser }
         newUser.userName = logInInfo.userName
         this.setState({ currentUser: newUser })
+    }
+
+    handleDescriptionChange = (e) => {
+        this.setState({
+            debitDescription: e.target.value //e is the change event, target is which element is being changed, the text from the element that is being changed
+        })
+    }
+
+    handleAmountChange = (e) => {
+    this.setState({
+        debitAmount: e.target.value
+    })
     }
 
     render() {
@@ -80,7 +92,7 @@ class App extends Component {
         const UserProfileComponent = () => (
             <UserProfile userName={this.state.currentUser.userName} memberSince={this.state.currentUser.memberSince} />
         );
-        const DebitComponent = () => (<Debits addDebit={this.addDebit} debits={debits} debitDescription={debitDescription} debitAmount={debitAmount} />)
+        const DebitComponent = () => (<Debits addDebit={this.addDebit} debits={debits} debitDescription={debitDescription} debitAmount={debitAmount} handleAmountChange={this.handleAmountChange} handleDescriptionChange={this.handleDescriptionChange} />)
         const CreditComponent = () => (<Credits addCredit={this.addCredit} credits={credits} />)
 
         return (
