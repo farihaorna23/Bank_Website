@@ -7,6 +7,11 @@ const Debits = (props) => {
         })
     }
 
+    const handleSubmit = (e) => {
+        e.preventDefault();//prevents the page from refreshing
+        props.addDebit(e,{amount:props.debitAmount, description:props.debitDescription})
+    }
+
     return (
         <div>
             <h1>Debits</h1>
@@ -15,8 +20,8 @@ const Debits = (props) => {
             </ul>
 
             <form>
-                <input type="text" />
-                <input type="text" />
+                <input type="text" value={props.debitDescription} />
+                <input type="text" value={props.debitAmount} />
                 <input type="submit" value="Add Debit" />
             </form>
 

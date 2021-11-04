@@ -7,6 +7,7 @@ import Credits from './components/Credits';
 import axios from "axios"
 import Login from './components/Login';
 import "./App.css";
+import uuid from "react-uuid"
 
 
 class App extends Component {
@@ -21,7 +22,10 @@ class App extends Component {
                 memberSince: '07/23/96',
             },
             debits: [],
-            credits: []
+            credits: [],
+            debitDescription: "",
+            debitAmount: "",
+
         }
     }
 
@@ -47,8 +51,16 @@ class App extends Component {
 
     }
 
-    addDebit = (e,debitinfo) => {
-     
+    addDebit = (e) => {
+        this.setState({
+            debits: [...this.state.debits,
+            {
+                amount: this.state.debitAmount,//setting whatever amount the user typed in the text field
+                description: this.state.debitDescription, //setting whatever amount the user typed in the text field
+                id:uuid(), //generates a new id
+                date: new Date(),//generates the current date
+            }]
+        }) //keeps the old information but also add new information 
     }
 
     mockLogIn = (logInInfo) => {
@@ -61,12 +73,14 @@ class App extends Component {
 
         const { debits } = this.state;
         const { credits } = this.state;
+        const { debitDescription } = this.state;
+        const { debitAmount } = this.state;
         const LogInComponent = () => (<Login user={this.state.currentUser} mockLogIn={this.mockLogIn} />)
         const HomeComponent = () => (<Home accountBalance={this.state.accountBalance} />);
         const UserProfileComponent = () => (
             <UserProfile userName={this.state.currentUser.userName} memberSince={this.state.currentUser.memberSince} />
         );
-        const DebitComponent = () => (<Debits addDebit={this.addDebit} debits={debits} />)
+        const DebitComponent = () => (<Debits addDebit={this.addDebit} debits={debits} debitDescription={debitDescription} debitAmount={debitAmount} />)
         const CreditComponent = () => (<Credits addCredit={this.addCredit} credits={credits} />)
 
         return (
