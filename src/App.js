@@ -47,12 +47,8 @@ class App extends Component {
 
     }
 
-    addDebit = (e) => {
-
-    }
-
-    addCredit = (e) => {
-
+    addDebit = (e,debitinfo) => {
+     
     }
 
     mockLogIn = (logInInfo) => {
