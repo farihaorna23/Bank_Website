@@ -6,6 +6,7 @@ function Navbar(){
         <Link to="/userProfile">UserName</Link>
         <Link to="/debits">Debit</Link>
         <Link to="/userProfile">Credit</Link>
+        <Link to="/">Home</Link>
       </div>
     );
 }
