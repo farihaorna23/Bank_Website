@@ -24,7 +24,7 @@ class App extends Component {
             debits: [],
             credits: [],
             debitDescription: "",
-            debitAmount: "",
+            debitAmount:0,
 
         }
     }
@@ -51,18 +51,39 @@ class App extends Component {
 
     }
 
+    // componentDidUpdate(prevProps, prevState){
+    // if(this.state.debits.length !== prevState.debits.length ||this.state.credits.length !== prevState.credits.length) //compadring the length 
+    // {
+    //     let debitSum = 0, creditSum = 0;
+    //     this.state.debits.forEach((debit) => {
+    //         debitSum += debit.amount;
+    //     })
+
+    //     this.state.credits.forEach((credit) => {
+    //         creditSum += credit.amount;
+    //     })
+
+    //     let accountBalance = creditSum - debitSum;
+    //     this.setState({accountBalance });
+    // }
+    // }
+
     addDebit = (e) => {
+        e.preventDefault();
         this.setState({
             debits: [...this.state.debits,
             {
                 amount: this.state.debitAmount,//setting whatever amount the user typed in the text field
                 description: this.state.debitDescription, //setting whatever amount the user typed in the text field
                 id: uuid(), //generates a new id
-                date: new Date(),//generates the current date
-            }]
+                date: new Date().toISOString(),//generates the current date
+            }],
+            accountBalance:this.state.accountBalance-this.state.debitAmount
+    
+
         }) //keeps the old information but also add new information 
     }
-
+    
     mockLogIn = (logInInfo) => {
         const newUser = { ...this.state.currentUser }
         newUser.userName = logInInfo.userName
@@ -76,9 +97,9 @@ class App extends Component {
     }
 
     handleAmountChange = (e) => {
-    this.setState({
-        debitAmount: e.target.value
-    })
+        this.setState({
+            debitAmount: e.target.value
+        })
     }
 
     render() {

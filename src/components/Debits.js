@@ -5,7 +5,7 @@ const Debits = (props) => {
         const { debits } = props;
         return debits.map((debit) => {
             let date = debit.date.slice(0, 10);
-            return <li key={debit.id}>{debit.amount}{debit.description}{date}</li>
+            return <li key={debit.id}> {debit.amount} {debit.description} {date}</li>
         })
     }
 
@@ -16,8 +16,8 @@ const Debits = (props) => {
             <ul>
                 {debitsView()}
             </ul>
-
-            <form>
+            {/* when the form is submitted, it calls the addDebit function */}
+            <form onSubmit={props.addDebit}>
                 <input type="text" value={props.debitDescription} onChange={props.handleDescriptionChange} />
                 <input type="text" value={props.debitAmount} onChange={props.handleAmountChange} />
                 <input type="submit" value="Add Debit" />
