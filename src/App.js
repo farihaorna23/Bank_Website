@@ -18,7 +18,7 @@ class App extends Component {
         this.state = {
             accountBalance: 14568.27,
             currentUser: {
-                userName: 'fariha_hossain',
+                userName: 'joe_shmo',
                 memberSince: '07/23/96',
             },
             debits: [],
@@ -27,7 +27,6 @@ class App extends Component {
             debitAmount: 0,
             creditDescription: "",
             creditAmount: 0,
-
 
         }
     }
@@ -86,17 +85,20 @@ class App extends Component {
 
         }) //keeps the old information but also add new information 
     }
+
     addCredit = (e) => {
+        // console.log(this.state.creditAmount)
         e.preventDefault();
+        // console.log(this.state.accountBalance+Number(this.state.creditAmount))
         this.setState({
-            debits: [...this.state.debits,
+            credits: [...this.state.credits,
             {
                 amount: this.state.creditAmount,//setting whatever amount the user typed in the text field
                 description: this.state.creditDescription, //setting whatever amount the user typed in the text field
                 id: uuid(), //generates a new id
                 date: new Date().toISOString(),//generates the current date
             }],
-            accountBalance: this.state.accountBalance + this.state.creditAmount
+            accountBalance: this.state.accountBalance + Number(this.state.creditAmount)
 
 
         }) //keeps the old information but also add new information 
@@ -140,14 +142,15 @@ class App extends Component {
         const { debitAmount } = this.state;
         const { creditDescription } = this.state;
         const { creditAmount } = this.state;
+
         const LogInComponent = () => (<Login user={this.state.currentUser} mockLogIn={this.mockLogIn} accountBalance={this.state.accountBalance} />)
         const HomeComponent = () => (<Home accountBalance={this.state.accountBalance} />);
         const UserProfileComponent = () => (
             <UserProfile userName={this.state.currentUser.userName} memberSince={this.state.currentUser.memberSince} accountBalance={this.state.accountBalance} />
         );
         const DebitComponent = () => (<Debits addDebit={this.addDebit} debits={debits} debitDescription={debitDescription} debitAmount={debitAmount} handleAmountChange={this.handleAmountChange} handleDescriptionChange={this.handleDescriptionChange} accountBalance={this.state.accountBalance} />)
-        const CreditComponent = () => (<Credits addCredit={this.addCredit} credits={credits} creditDescription={creditDescription} creditAmount={creditAmount} handleAmountChange_C={this.handleAmountChange_C} handleDescriptionChange_C={this.handleDescriptionChange_C} accountBalance={this.state.accountBalance} />)
-
+        const CreditComponent = () => (<Credits addCredit={this.addCredit} credits={credits} creditDescription={creditDescription} creditAmount={creditAmount} handleAmountChange_C={this.handleAmountChange_C} handleDescriptionChange_C={this.handleDescriptionChange_C} accountBalance={this.state.accountBalance}/>)
+        
         return (
             <Router>
                 <div className="App">

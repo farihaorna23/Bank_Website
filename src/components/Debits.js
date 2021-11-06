@@ -25,7 +25,7 @@ const Debits = (props) => {
             </form>
 
                 <Navbar />
-                {/* <AccountBalance accountBalance={this.props.accountBalance} /> */}
+                <AccountBalance accountBalance={props.accountBalance} /> 
             
         </div>
             )
