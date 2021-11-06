@@ -18,13 +18,16 @@ class App extends Component {
         this.state = {
             accountBalance: 14568.27,
             currentUser: {
-                userName: 'joe_shmo',
+                userName: 'fariha_hossain',
                 memberSince: '07/23/96',
             },
             debits: [],
             credits: [],
             debitDescription: "",
-            debitAmount:0,
+            debitAmount: 0,
+            creditDescription: "",
+            creditAmount: 0,
+
 
         }
     }
@@ -78,12 +81,27 @@ class App extends Component {
                 id: uuid(), //generates a new id
                 date: new Date().toISOString(),//generates the current date
             }],
-            accountBalance:this.state.accountBalance-this.state.debitAmount
-    
+            accountBalance: this.state.accountBalance - this.state.debitAmount
+
 
         }) //keeps the old information but also add new information 
     }
-    
+    addCredit = (e) => {
+        e.preventDefault();
+        this.setState({
+            debits: [...this.state.debits,
+            {
+                amount: this.state.creditAmount,//setting whatever amount the user typed in the text field
+                description: this.state.creditDescription, //setting whatever amount the user typed in the text field
+                id: uuid(), //generates a new id
+                date: new Date().toISOString(),//generates the current date
+            }],
+            accountBalance: this.state.accountBalance + this.state.creditAmount
+
+
+        }) //keeps the old information but also add new information 
+    }
+
     mockLogIn = (logInInfo) => {
         const newUser = { ...this.state.currentUser }
         newUser.userName = logInInfo.userName
@@ -102,19 +120,33 @@ class App extends Component {
         })
     }
 
+    handleDescriptionChange_C = (e) => {
+        this.setState({
+            creditDescription: e.target.value //e is the change event, target is which element is being changed, the text from the element that is being changed
+        })
+    }
+
+    handleAmountChange_C = (e) => {
+        this.setState({
+            creditAmount: e.target.value
+        })
+    }
+
     render() {
 
         const { debits } = this.state;
         const { credits } = this.state;
         const { debitDescription } = this.state;
         const { debitAmount } = this.state;
-        const LogInComponent = () => (<Login user={this.state.currentUser} mockLogIn={this.mockLogIn} accountBalance={this.state.accountBalance}/>)
+        const { creditDescription } = this.state;
+        const { creditAmount } = this.state;
+        const LogInComponent = () => (<Login user={this.state.currentUser} mockLogIn={this.mockLogIn} accountBalance={this.state.accountBalance} />)
         const HomeComponent = () => (<Home accountBalance={this.state.accountBalance} />);
         const UserProfileComponent = () => (
-            <UserProfile userName={this.state.currentUser.userName} memberSince={this.state.currentUser.memberSince} accountBalance={this.state.accountBalance}/>
+            <UserProfile userName={this.state.currentUser.userName} memberSince={this.state.currentUser.memberSince} accountBalance={this.state.accountBalance} />
         );
-        const DebitComponent = () => (<Debits addDebit={this.addDebit} debits={debits} debitDescription={debitDescription} debitAmount={debitAmount} handleAmountChange={this.handleAmountChange} handleDescriptionChange={this.handleDescriptionChange} accountBalance={this.state.accountBalance}/>)
-        const CreditComponent = () => (<Credits addCredit={this.addCredit} credits={credits} />)
+        const DebitComponent = () => (<Debits addDebit={this.addDebit} debits={debits} debitDescription={debitDescription} debitAmount={debitAmount} handleAmountChange={this.handleAmountChange} handleDescriptionChange={this.handleDescriptionChange} accountBalance={this.state.accountBalance} />)
+        const CreditComponent = () => (<Credits addCredit={this.addCredit} credits={credits} creditDescription={creditDescription} creditAmount={creditAmount} handleAmountChange_C={this.handleAmountChange_C} handleDescriptionChange_C={this.handleDescriptionChange_C} accountBalance={this.state.accountBalance} />)
 
         return (
             <Router>

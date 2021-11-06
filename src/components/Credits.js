@@ -1,3 +1,6 @@
+import Navbar from './Navbar'
+import AccountBalance from './AccountBalance';
+
 const Credits = (props) => {
     let creditsView = () => {
         const { credits } = props;
@@ -10,7 +13,17 @@ const Credits = (props) => {
     return (
         <div>
             <h1>Credits</h1>
-            {creditsView()}
+            <ul>
+                {creditsView()}
+            </ul>
+            <form onSubmit={props.addCredit}>
+                <label> Description: <input type="text" value={props.creditDescription} onChange={props.handleDescriptionChange_C} /> </label>
+                <label> Amount:   <input type="text" value={props.creditAmount} onChange={props.handleAmountChange_C} /> </label>
+                <input type="submit" value="Add Credit" />
+            </form>
+
+            <Navbar />
+            {/* <AccountBalance accountBalance={this.props.accountBalance} /> */}
         </div>
     )
 
