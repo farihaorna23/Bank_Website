@@ -12,6 +12,7 @@ class UserProfile extends Component {
           <div>Member Since: {this.props.memberSince}</div>
           <Navbar/>
           <AccountBalance accountBalance={this.props.accountBalance} />
+          
         </div>
     );
   }
