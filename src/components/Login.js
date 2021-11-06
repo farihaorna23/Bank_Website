@@ -1,6 +1,9 @@
 // Login.js
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
+import Navbar from './Navbar'
+import AccountBalance from './AccountBalance';
+
 
 class LogIn extends Component {
   constructor () {
@@ -30,6 +33,7 @@ class LogIn extends Component {
   }
 
   render () {
+    
     if (this.state.redirect) {
       return (<Redirect to="/userProfile"/>)
     }
@@ -47,6 +51,8 @@ class LogIn extends Component {
           </div>
           <button>Log In</button>
         </form>
+        <Navbar/>
+        <AccountBalance accountBalance={this.props.accountBalance} />
       </div>
     )
   }

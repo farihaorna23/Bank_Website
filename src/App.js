@@ -108,7 +108,7 @@ class App extends Component {
         const { credits } = this.state;
         const { debitDescription } = this.state;
         const { debitAmount } = this.state;
-        const LogInComponent = () => (<Login user={this.state.currentUser} mockLogIn={this.mockLogIn} />)
+        const LogInComponent = () => (<Login user={this.state.currentUser} mockLogIn={this.mockLogIn} accountBalance={this.state.accountBalance}/>)
         const HomeComponent = () => (<Home accountBalance={this.state.accountBalance} />);
         const UserProfileComponent = () => (
             <UserProfile userName={this.state.currentUser.userName} memberSince={this.state.currentUser.memberSince} accountBalance={this.state.accountBalance}/>
