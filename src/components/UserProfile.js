@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import Navbar from './Navbar'
+import AccountBalance from './AccountBalance';
 
 class UserProfile extends Component {
   render() {
@@ -8,6 +10,8 @@ class UserProfile extends Component {
 
           <div>Username: {this.props.userName}</div>
           <div>Member Since: {this.props.memberSince}</div>
+          <Navbar/>
+          <AccountBalance accountBalance={this.props.accountBalance} />
         </div>
     );
   }
