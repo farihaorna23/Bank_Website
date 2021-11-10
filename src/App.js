@@ -24,9 +24,9 @@ class App extends Component {
             debits: [],
             credits: [],
             debitDescription: "",
-            debitAmount: 0,
+            debitAmount: "",
             creditDescription: "",
-            creditAmount: 0,
+            creditAmount: "",
 
         }
     }

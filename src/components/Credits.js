@@ -11,7 +11,7 @@ const Credits = (props) => {
     }
 
     return (
-        <div>
+        <div className="container">
             <h1>Credits</h1>
             <ul>
                 {creditsView()}

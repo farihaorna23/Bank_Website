@@ -12,7 +12,7 @@ const Debits = (props) => {
 
 
     return (
-        <div>
+        <div className="container">
             <h1>Debits</h1>
             <ul>
                 {debitsView()}
