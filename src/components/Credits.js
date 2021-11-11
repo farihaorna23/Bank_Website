@@ -1,6 +1,7 @@
 import Navbar from './Navbar'
 import AccountBalance from './AccountBalance';
 
+//formats the credit data in a list. The way we want it to be viewed.
 const Credits = (props) => {
     let creditsView = () => {
         const { credits } = props;
@@ -14,18 +15,24 @@ const Credits = (props) => {
         <div className="container">
             <h1>Credits</h1>
             <ul>
+                {/* displays all the credit data */}
                 {creditsView()}
             </ul>
-            {/* when the form is submitted, it calls the addDebit function */}
-            <form onSubmit={props.addCredit}>
+            
+            {/* Form. text box for password and username. The third imput is for the submit button */}
+            {/*passing props to the debit component in value */}
+            {/* the value would be whatever is typed into the text field */}
+            {/* onChange would call a function that would be updating whatever the user is typing in the text field */}
+
+            <form onSubmit={props.addCredit}>  {/* when the form is submitted, it calls the addCredit function */}
                 <label> Description: <input type="text" value={props.creditDescription} onChange={props.handleDescriptionChange_C} /> </label>
                 <label> Amount:   <input type="text" value={props.creditAmount} onChange={props.handleAmountChange_C} /> </label>
                 <input type="submit" value="Add Credit" />
             </form>
-
+             {/* calling the navbar component and account balance componet with its props */}
             <Navbar />
             <AccountBalance accountBalance={props.accountBalance} />
-            
+
         </div>
     )
 

@@ -11,7 +11,7 @@ class UserProfile extends Component {
 
         <div>Username: {this.props.userName}</div>
         <div>Member Since: {this.props.memberSince}</div>
-        <Navbar />
+        <Navbar />  {/* calling the navbar component and account balance componet with its props */}
         <AccountBalance accountBalance={this.props.accountBalance} />
 
       </div>

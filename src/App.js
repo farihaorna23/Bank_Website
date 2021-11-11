@@ -11,16 +11,17 @@ import uuid from "react-uuid"
 
 
 class App extends Component {
-
+    //constructor. Initial state.
     constructor() {
         super();
 
         this.state = {
             accountBalance: 14568.27,
             currentUser: {
-                userName: 'joe_shmo',
+                userName: 'fariha_hossain',
                 memberSince: '07/23/96',
             },
+            // adding variables to the state and intializing them to empty string
             debits: [],
             credits: [],
             debitDescription: "",
@@ -32,13 +33,14 @@ class App extends Component {
     }
 
     async componentDidMount() {
+        //axios call to endpoints
         let debits = await axios.get("https://moj-api.herokuapp.com/debits");
         let credits = await axios.get("https://moj-api.herokuapp.com/credits");
 
         //getting data from API response
         debits = debits.data;
         credits = credits.data;
-
+        
         let debitSum = 0, creditSum = 0;
         debits.forEach((debit) => {
             debitSum += debit.amount;
@@ -53,43 +55,29 @@ class App extends Component {
 
     }
 
-    // componentDidUpdate(prevProps, prevState){
-    // if(this.state.debits.length !== prevState.debits.length ||this.state.credits.length !== prevState.credits.length) //compadring the length 
-    // {
-    //     let debitSum = 0, creditSum = 0;
-    //     this.state.debits.forEach((debit) => {
-    //         debitSum += debit.amount;
-    //     })
-
-    //     this.state.credits.forEach((credit) => {
-    //         creditSum += credit.amount;
-    //     })
-
-    //     let accountBalance = creditSum - debitSum;
-    //     this.setState({accountBalance });
-    // }
-    // }
-
+   
+    //users would be able to add amount and description to the list of debit data
     addDebit = (e) => {
-        e.preventDefault();
+        e.preventDefault(); //prevents the page from refreshing automatically?
         this.setState({
             debits: [...this.state.debits,
             {
                 amount: this.state.debitAmount,//setting whatever amount the user typed in the text field
-                description: this.state.debitDescription, //setting whatever amount the user typed in the text field
+                description: this.state.debitDescription, //setting whatever description the user typed in the text field
                 id: uuid(), //generates a new id
                 date: new Date().toISOString(),//generates the current date
             }],
-            accountBalance: this.state.accountBalance - this.state.debitAmount
-
+            accountBalance: this.state.accountBalance - this.state.debitAmount 
+            // calculates the new accountBalance
 
         }) //keeps the old information but also add new information 
     }
 
+    //users would be able to add amount and description to the list of debit data
     addCredit = (e) => {
-        // console.log(this.state.creditAmount)
-        e.preventDefault();
-        // console.log(this.state.accountBalance+Number(this.state.creditAmount))
+        
+        e.preventDefault();//prevents the page from refreshing automatically?
+        
         this.setState({
             credits: [...this.state.credits,
             {
@@ -99,7 +87,7 @@ class App extends Component {
                 date: new Date().toISOString(),//generates the current date
             }],
             accountBalance: this.state.accountBalance + Number(this.state.creditAmount)
-
+            // // calculates the new accountBalance
 
         }) //keeps the old information but also add new information 
     }
@@ -109,40 +97,51 @@ class App extends Component {
         newUser.userName = logInInfo.userName
         this.setState({ currentUser: newUser })
     }
-
+    
+    
     handleDescriptionChange = (e) => {
+        //setting the state
+        // updating the value of debitDescripion
         this.setState({
-            debitDescription: e.target.value //e is the change event, target is which element is being changed, the text from the element that is being changed
+            debitDescription: e.target.value //e is the change event, target is which element is being changed, the value is the text from the element that is being changed
         })
     }
 
     handleAmountChange = (e) => {
+        //setting the state
+        // updating the value of debitAmount
         this.setState({
             debitAmount: e.target.value
         })
     }
 
     handleDescriptionChange_C = (e) => {
+        //setting the state
+        // updating the value of creditDescripion
         this.setState({
             creditDescription: e.target.value //e is the change event, target is which element is being changed, the text from the element that is being changed
         })
     }
 
     handleAmountChange_C = (e) => {
+        //setting the state
+        // updating the value of creditAmount
         this.setState({
             creditAmount: e.target.value
         })
     }
 
     render() {
-
+        // destructuring it
         const { debits } = this.state;
         const { credits } = this.state;
         const { debitDescription } = this.state;
         const { debitAmount } = this.state;
         const { creditDescription } = this.state;
         const { creditAmount } = this.state;
-
+        
+        //functions that returns components with props passed to it
+        //passing the props from the parents to the child
         const LogInComponent = () => (<Login user={this.state.currentUser} mockLogIn={this.mockLogIn} accountBalance={this.state.accountBalance} />)
         const HomeComponent = () => (<Home accountBalance={this.state.accountBalance} />);
         const UserProfileComponent = () => (
@@ -151,6 +150,8 @@ class App extends Component {
         const DebitComponent = () => (<Debits addDebit={this.addDebit} debits={debits} debitDescription={debitDescription} debitAmount={debitAmount} handleAmountChange={this.handleAmountChange} handleDescriptionChange={this.handleDescriptionChange} accountBalance={this.state.accountBalance} />)
         const CreditComponent = () => (<Credits addCredit={this.addCredit} credits={credits} creditDescription={creditDescription} creditAmount={creditAmount} handleAmountChange_C={this.handleAmountChange_C} handleDescriptionChange_C={this.handleDescriptionChange_C} accountBalance={this.state.accountBalance}/>)
         
+        //In render there are functions that returns components with props passed to it
+        //path for each component/page
         return (
             <Router>
                 <div className="App">

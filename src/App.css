@@ -9,14 +9,6 @@
   justify-content: center;
   width:100%;
   min-height:100vh;
-}
-
-.container{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  width:90%;
   background-color: #E5DCC3;
 }
 
@@ -26,7 +18,6 @@
   align-items: center;
   justify-content: space-evenly;
   width:90%;
-  background-color: #E5DCC3;
 }
 
 
