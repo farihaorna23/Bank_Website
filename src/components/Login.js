@@ -51,7 +51,7 @@ class LogIn extends Component {
           </div>
           <button>Log In</button>
         </form>
-         {/* calling the navbar component and account balance componet with its props */}
+         {/* reffering to the navbar component and account balance componet with its props */}
         <Navbar />
         <AccountBalance accountBalance={this.props.accountBalance} />
       </div>

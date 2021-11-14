@@ -21,7 +21,7 @@ class App extends Component {
                 userName: 'fariha_hossain',
                 memberSince: '07/23/96',
             },
-            // adding variables to the state and intializing them to empty string
+            // adding variables to the state and intializing them to empty string and array
             debits: [],
             credits: [],
             debitDescription: "",
@@ -58,7 +58,7 @@ class App extends Component {
    
     //users would be able to add amount and description to the list of debit data
     addDebit = (e) => {
-        e.preventDefault(); //prevents the page from refreshing automatically?
+        e.preventDefault(); //prevents the page from refreshing automatically
         this.setState({
             debits: [...this.state.debits,
             {
@@ -73,10 +73,10 @@ class App extends Component {
         }) //keeps the old information but also add new information 
     }
 
-    //users would be able to add amount and description to the list of debit data
+    //users would be able to add amount and description to the list of credit data
     addCredit = (e) => {
         
-        e.preventDefault();//prevents the page from refreshing automatically?
+        e.preventDefault();//prevents the page from refreshing automatically
         
         this.setState({
             credits: [...this.state.credits,
@@ -87,7 +87,7 @@ class App extends Component {
                 date: new Date().toISOString(),//generates the current date
             }],
             accountBalance: this.state.accountBalance + Number(this.state.creditAmount)
-            // // calculates the new accountBalance
+            // calculates the new accountBalance
 
         }) //keeps the old information but also add new information 
     }
@@ -100,6 +100,7 @@ class App extends Component {
     
     
     handleDescriptionChange = (e) => {
+        //for debit
         //setting the state
         // updating the value of debitDescripion
         this.setState({
@@ -108,14 +109,16 @@ class App extends Component {
     }
 
     handleAmountChange = (e) => {
+        //for debit
         //setting the state
         // updating the value of debitAmount
         this.setState({
-            debitAmount: e.target.value
+            debitAmount: e.target.value //e is the change event, target is which element is being changed, the value is the text from the element that is being changed
         })
     }
 
     handleDescriptionChange_C = (e) => {
+        //for credit
         //setting the state
         // updating the value of creditDescripion
         this.setState({
@@ -124,10 +127,11 @@ class App extends Component {
     }
 
     handleAmountChange_C = (e) => {
+        //for credit
         //setting the state
         // updating the value of creditAmount
         this.setState({
-            creditAmount: e.target.value
+            creditAmount: e.target.value //e is the change event, target is which element is being changed, the value is the text from the element that is being changed
         })
     }
 

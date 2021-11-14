@@ -30,7 +30,7 @@ const Debits = (props) => {
                 <label> Amount:   <input type="text" value={props.debitAmount} onChange={props.handleAmountChange} /> </label>
                 <input type="submit" value="Add Debit" />
             </form>
-             {/* calling the navbar component and account balance componet with its props */}
+             {/* reffering to the navbar component and account balance componet with its props */}
             <Navbar />
             <AccountBalance accountBalance={props.accountBalance} />
 

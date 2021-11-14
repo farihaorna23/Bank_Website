@@ -20,7 +20,7 @@ const Credits = (props) => {
             </ul>
             
             {/* Form. text box for password and username. The third imput is for the submit button */}
-            {/*passing props to the debit component in value */}
+            {/*passing props to the credit component in value */}
             {/* the value would be whatever is typed into the text field */}
             {/* onChange would call a function that would be updating whatever the user is typing in the text field */}
 
@@ -29,7 +29,7 @@ const Credits = (props) => {
                 <label> Amount:   <input type="text" value={props.creditAmount} onChange={props.handleAmountChange_C} /> </label>
                 <input type="submit" value="Add Credit" />
             </form>
-             {/* calling the navbar component and account balance componet with its props */}
+             {/* reffering to the navbar component and account balance componet with its props */}
             <Navbar />
             <AccountBalance accountBalance={props.accountBalance} />
 
